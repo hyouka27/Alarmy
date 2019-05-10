@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AlarmOS.Models.Alarmy>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Stat";
+}
+
+<h3>Statystyki użytkowników</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Pracownik
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level2)
+            </th>
+            <th>
+                Ile alarmów dodał
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level2)
+                </td>
+                <td>
+                        @ViewData["Lasts"]
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
