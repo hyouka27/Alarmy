@@ -17,10 +17,11 @@ namespace AlarmOS.Models
 
         public ApplicationRole(string roleName, string description, DateTime creationDate) : base(roleName)
         {
+            this.roleName = roleName;
             this.Description = description;
             this.CreationDate = creationDate;
         }
-
+        public string roleName;
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }
     }

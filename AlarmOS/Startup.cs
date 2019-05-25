@@ -14,6 +14,8 @@ using AlarmOS.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AlarmOS.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using AlarmOS.Services;
 
 namespace AlarmOS
 {
@@ -34,33 +36,35 @@ namespace AlarmOS
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                services.AddScoped<SignInManager<ApplicationUser>, SignInManager<ApplicationUser>>();
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, ApplicationRole>(
-              
-                8)
-              .AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddDefaultUI(UIFramework.Bootstrap4)
-              .AddDefaultTokenProviders();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddAuthorization(options =>
+            services.AddIdentity<ApplicationUser,ApplicationRole>(config =>
             {
-            options.AddPolicy("ElevatedRights",
-                     policy => policy.RequireRole("Administrator","Emp1","Emp3"));
-            });
+                config.SignIn.RequireConfirmedEmail = false;
+            }).AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("ElevatedRights",
+            //             policy => policy.RequireRole("Administrator", "Emp1", "Emp3"));
+            //});
             services.AddDbContext<AlarmOSContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AlarmOSContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, 
+        public void Configure(IApplicationBuilder app,
             IHostingEnvironment env, ApplicationDbContext context,
             RoleManager<ApplicationRole> roleManager,
-            UserManager<ApplicationUser> userManager )
+            UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {

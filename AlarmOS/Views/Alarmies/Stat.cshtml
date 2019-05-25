@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AlarmOS.Models.Alarmy>
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Stat";
@@ -37,8 +37,8 @@
                     @Html.DisplayFor(modelItem => item.Level2)
                 </td>
                 <td>
-                        @ViewData["Lasts"]
-                    </td>
+                    @ViewData["Lasts"]
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ReleaseDate)
                 </td>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AlarmOS.Models.Alarmy>
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Stat";
@@ -28,15 +28,12 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td></td>
+                <td></td>
                 <td>
+                    @ViewData["Lasts"]
                 </td>
-                <td>
-                </td>
-                <td>
-                        @ViewData["Lasts"]
-                    </td>
-                <td>
-                </td>
+                <td></td>
             </tr>
         }
     </tbody>

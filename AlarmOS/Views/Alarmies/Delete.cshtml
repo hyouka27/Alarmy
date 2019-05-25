@@ -1,55 +1,55 @@
 ﻿@model AlarmOS.Models.Alarmy
-    @using Microsoft.AspNetCore.Identity
-    @inject SignInManager<IdentityUser> SignInManager
-    @inject UserManager<IdentityUser> UserManager
-    @{
-        ViewData["Title"] = "Delete";
-    }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Delete";
+}
 
-    <h1>Usuwanie</h1>
+<h1>Usuwanie</h1>
 
-    <h3>Czy napewno chcesz to usunąć ?</h3>
-    <div>
-        <h4>Alarm</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ReleaseDate)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.About)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.About)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Level)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Level)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Level2)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Level2)
-            </dd>
-        </dl>
+<h3>Czy napewno chcesz to usunąć ?</h3>
+<div>
+    <h4>Alarm</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.About)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Level2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Level2)
+        </dd>
+    </dl>
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
-            @if (((User.IsInRole("Emp3") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 4))) || (User.IsInRole("Emp2") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 3)))
-            {
-                <input type="submit" value="Delete" class="btn btn-danger" />} |
-            <a asp-action="Index">Wróć brak uprawnień do usuwania alarmu.</a>
-        </form>
-    </div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        @if (((User.IsInRole("Emp3") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 4))) || (User.IsInRole("Emp2") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 3)))
+        {
+            <input type="submit" value="Delete" class="btn btn-danger" />} |
+        <a asp-action="Index">Wróć brak uprawnień do usuwania alarmu.</a>
+    </form>
+</div>
