@@ -51,16 +51,15 @@ namespace AlarmOS
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("ElevatedRights",
-            //             policy => policy.RequireRole("Administrator", "Emp1", "Emp3"));
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ElevatedRights",
+                         policy => policy.RequireRole("Administrator", "Emp1", "Emp3"));
+            });
             services.AddDbContext<AlarmOSContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AlarmOSContext")));
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      
         public void Configure(IApplicationBuilder app,
             IHostingEnvironment env, ApplicationDbContext context,
             RoleManager<ApplicationRole> roleManager,
@@ -89,6 +88,7 @@ namespace AlarmOS
                     name: "default",
                     template: "{controller=Alarmies}/{action=Index}/{id?}");
             });
+
 
             DummyData.Initialize(context, userManager, roleManager).Wait();
         }

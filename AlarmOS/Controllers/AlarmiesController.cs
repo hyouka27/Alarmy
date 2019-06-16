@@ -27,33 +27,12 @@ namespace AlarmOS.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Stat([Bind("Id,Employer,ReleaseDate,Level2,UseId")] Alarmy alarmy)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Stat()
         {
-        int test = alarmy.Id;
-        string a = alarmy.UseId;
-        var adding = new SqlParameter("user", a);
-        var suma = _context.Alarmy
-        .FromSql("SELECT @adding, COUNT(Id) FROM[dbo].[Alarmy] GROUP BY @adding", adding)
-        .ToList();
-        ViewData["Lasts"] = suma;
-        return View(await _context.Alarmy.ToListAsync());
-        }
-        //// GET: Alarmies
-        //public async Task<IActionResult>  Stat()
-        //{
-        //    return View(await _context.Alarmy.ToListAsync());
-        //}
-        public async Task<IActionResult> Admin([Bind("UseId")] Alarmy alarmy)
-        {
-            int test = alarmy.Id;
-            string a = alarmy.UseId;
-            var adding = new SqlParameter("user", a);
-            var suma = _context.Alarmy
-            .FromSql("SELECT @adding, COUNT(Id) FROM[dbo].[Alarmy] GROUP BY @adding", adding)
-            .ToList();
-            ViewData["Lasts"] = suma;
             return View(await _context.Alarmy.ToListAsync());
         }
+
         [HttpPost]
         public string Index(string searchString, bool notUsed)
         {
@@ -205,6 +184,7 @@ namespace AlarmOS.Controllers
             return View(alarmy);
         }
 
+        [Authorize(Roles = "Admin,Emp3")]
         // GET: Alarmies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -223,6 +203,7 @@ namespace AlarmOS.Controllers
             return View(alarmy);
         }
 
+        [Authorize(Roles = "Admin,Emp3")]
         // POST: Alarmies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

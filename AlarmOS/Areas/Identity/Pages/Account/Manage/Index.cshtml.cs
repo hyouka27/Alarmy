@@ -110,7 +110,7 @@ namespace AlarmOS.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Dane zostały zaktualizowane.";
             return RedirectToPage();
         }
 

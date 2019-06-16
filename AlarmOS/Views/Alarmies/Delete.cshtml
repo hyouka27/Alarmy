@@ -47,9 +47,9 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        @if (((User.IsInRole("Emp3") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 4))) || (User.IsInRole("Emp2") && (Convert.ToInt32((Html.DisplayFor(model => model.Level))) < 3)))
+        @if ((User.IsInRole("Emp3")))
         {
             <input type="submit" value="Delete" class="btn btn-danger" />} |
-        <a asp-action="Index">Wróć brak uprawnień do usuwania alarmu.</a>
+        <a asp-action="Index">Wróć.</a>
     </form>
 </div>

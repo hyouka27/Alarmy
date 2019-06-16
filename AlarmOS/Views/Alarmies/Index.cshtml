@@ -7,20 +7,36 @@
     ViewData["Title"] = "Index";
 }
 
-<h3>Lista aktywnych alarmów</h3>
-@if (SignInManager.IsSignedIn(User))
-{
-    <a asp-action="Create" class="btn btn-primary">Dodaj nowy alarm</a>
-}
 
-<form asp-controller="Alarmy" asp-action="Index" style="float:right;" method="get">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Szukaj alarmu" name="SearchString" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Szukaj</button>
-        </div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">AlarmOS</h1>
+        <p class="lead">Przeglądaj alarmy zamieszczone poniżej, uważaj. </p>
     </div>
-</form>
+</div>
+
+<ul class="nav nav-tabs nav-justified">
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Lista aktywnych alarmów</a>
+    </li>
+    <li class="nav-item">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-action="Create" class="btn btn-primary">Dodaj nowy alarm</a>
+        }
+    </li>
+    <li class="nav-item">
+        <form asp-controller="Alarmy" asp-action="Index" style="float:right;" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Szukaj alarmu" name="SearchString" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Szukaj</button>
+                </div>
+            </div>
+        </form>
+    </li>
+</ul>
+
 
 <table class="table table-bordered">
     <thead>

@@ -7,7 +7,11 @@
     ViewData["Title"] = "Stat";
 }
 
-<h3>Statystyki użytkowników</h3>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Statystyki użytkowników</a>
+        </li>
+    </ul>
 
 <table class="table table-bordered">
     <thead>
@@ -16,18 +20,15 @@
                 Pracownik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Level2)
+                Poziom
             </th>
             <th>
-                Ile alarmów dodał
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
+                Id alarmów jakie dodał
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+            @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -37,10 +38,8 @@
                     @Html.DisplayFor(modelItem => item.Level2)
                 </td>
                 <td>
-                    @ViewData["Lasts"]
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    @Html.DisplayFor(modelItem => item.Id)
+
                 </td>
             </tr>
         }

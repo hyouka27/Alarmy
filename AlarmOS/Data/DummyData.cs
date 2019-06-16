@@ -28,6 +28,7 @@ namespace AlarmOS.Data
             string desc3 = "Rola pracownika z pelnym dostepem.";
 
             string password = "P@$$w0rd";
+            //string password = "C53E479B03B3220D3D56DA88C4CACE20";
 
             if (await roleManager.FindByNameAsync(role1) == null)
             {
@@ -46,6 +47,8 @@ namespace AlarmOS.Data
             {
                 var user = new ApplicationUser
                 {
+                    UserName = "aa@aa.aa",
+                    Email= "aa@aa.aa",
                     FirstName = "Adam",
                     LastName = "Aldridge",
                 };
@@ -63,6 +66,8 @@ namespace AlarmOS.Data
             {
                 var user = new ApplicationUser
                 {
+                    UserName = "bb@bb.bb",
+                    Email = "bb@bb.bb",
                     FirstName = "Bob",
                     LastName = "Barker",
                 };
@@ -80,6 +85,8 @@ namespace AlarmOS.Data
             {
                 var user = new ApplicationUser
                 {
+                    UserName = "mm@mm.mm",
+                    Email = "mm@mm.mm",
                     FirstName = "Mike",
                     LastName = "Myers",
                 };
@@ -96,6 +103,8 @@ namespace AlarmOS.Data
             {
                 var user = new ApplicationUser
                 {
+                    UserName = "dd@dd.dd",
+                    Email = "dd@dd.dd",
                     FirstName = "Donald",
                     LastName = "Duck",
                 };
